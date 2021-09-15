@@ -8,16 +8,35 @@ describe('[Exercise 1] trimProperties', () => {
     const actual = utils.trimProperties(input)
     expect(actual).toEqual(expected)
   })
-  // test('[2] returns a copy, leaving the original object intact', () => {})
+  test('[2] returns a copy, leaving the original object intact', () => {
+    const input = { copy: "true     " }
+    const expected = { copy: "true" }
+    const output = utils.trimProperties(input)
+    expect(input).toEqual(input)
+    expect(output).toEqual(expected)
+  })
 })
 
 describe('[Exercise 2] trimPropertiesMutation', () => {
-  // test('[3] returns an object with the properties trimmed', () => {})
-  // test('[4] the object returned is the exact same one we passed in', () => {})
+  test('[3] returns an object with the properties trimmed', () => {
+    const input = { string: " string " }
+    const expected = { string: "string" }
+    const output = utils.trimPropertiesMutation(input)
+    expect(output).toEqual(expected)
+  })
+  test('[4] the object returned is the exact same one we passed in', () => {
+    const input = { string: " string " }
+    const output = utils.trimPropertiesMutation(input)
+    expect(output).toBe(input)
+  })
 })
 
 describe('[Exercise 3] findLargestInteger', () => {
-  // test('[5] returns the largest number in an array of objects { integer: 2 }', () => {})
+  test('[5] returns the largest number in an array of objects { integer: 2 }', () => {
+    const array = [{ integer: 2 }, { integer: 8 }]
+    const largest = utils.findLargestInteger(array)
+    expect(largest).toBe(8)
+  })
 })
 
 describe('[Exercise 4] Counter', () => {
@@ -25,9 +44,24 @@ describe('[Exercise 4] Counter', () => {
   beforeEach(() => {
     counter = new utils.Counter(3) // each test must start with a fresh couter
   })
-  // test('[6] the FIRST CALL of counter.countDown returns the initial count', () => {})
-  // test('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {})
-  // test('[8] the count eventually reaches zero but does not go below zero', () => {})
+  test('[6] the FIRST CALL of counter.countDown returns the initial count', () => {
+    const initialCount = counter.countDown()
+    expect(initialCount).toBe(3)
+  })
+  test('[7] the SECOND CALL of counter.countDown returns the initial count minus one', () => {
+    counter.countDown()
+    const secondCount = counter.countDown()
+    expect(secondCount).toBe(2)
+  })
+  test('[8] the count eventually reaches zero but does not go below zero', () => {
+    counter.countDown()
+    counter.countDown()
+    counter.countDown()
+    const zero = counter.countDown()
+    const zeroStill = counter.countDown()
+    expect(zero).toBe(0)
+    expect(zeroStill).toBe(0)
+  })
 })
 
 describe('[Exercise 5] Seasons', () => {
