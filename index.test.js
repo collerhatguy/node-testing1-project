@@ -113,13 +113,39 @@ describe('[Exercise 6] Car', () => {
   beforeEach(() => {
     focus = new utils.Car('focus', 20, 30) // each test must start with a fresh car
   })
-  // test('[15] driving the car returns the updated odometer', () => {})
-  // test('[16] driving the car uses gas', () => {})
-  // test('[17] refueling allows to keep driving', () => {})
-  // test('[18] adding fuel to a full tank has no effect', () => {})
+  test('[15] driving the car returns the updated odometer', () => {
+    const odometer = focus.drive(4)
+    expect(odometer).toBeDefined()
+    expect(odometer).toBe(4)
+  })
+  test('[16] driving the car uses gas', () => {
+    focus.drive(30)
+    expect(focus.tank).toBe(19) 
+    focus.drive(30)
+    expect(focus.tank).toBe(18) 
+  })
+  test('[17] refueling allows to keep driving', () => {
+    focus.drive(30 * 20)
+    const odometer = focus.odometer
+    const newOdometer = focus.drive(1)
+    expect(odometer).toEqual(newOdometer)
+    focus.refuel(10)
+    const changedOdometer = focus.drive(3)
+    expect(changedOdometer).toEqual(odometer + 3)
+  })
+  test('[18] adding fuel to a full tank has no effect', () => {
+    focus.refuel(20)
+    expect(focus.tank).toBe(20) 
+  })
 })
 
 describe('[Exercise 7] isEvenNumberAsync', () => {
-  // test('[19] resolves true if passed an even number', () => {})
-  // test('[20] resolves false if passed an odd number', () => {})
+  test('[19] resolves true if passed an even number', async () => {
+    const even = utils.isEvenNumberAsync(2)
+    expect(even).toBe(true)
+  })
+  test('[20] resolves false if passed an odd number', async () => {
+    const even = utils.isEvenNumberAsync(1)
+    expect(even).toBe(false)
+  })
 })
